@@ -1,0 +1,105 @@
+﻿<!--
+  @file index.html
+  @description Main HTML entry point for the Password Strength Checker app.
+               Contains semantic UI sections for checker, generator, and breach checks.
+
+  @author      Benadic Manger
+  @version     1.0.0
+  @date        2026-05-15
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Real-time password strength checker with generator and optional breach lookup." />
+  <title>Password Strength Checker</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="card" aria-labelledby="app-title">
+      <header class="card-header">
+        <p class="eyebrow">Security Utility</p>
+        <h1 id="app-title">Password Strength Checker</h1>
+        <p class="subtitle">Check password quality in real time and generate safer alternatives.</p>
+      </header>
+
+      <section class="checker" aria-labelledby="password-label">
+        <label id="password-label" for="password-input">Password</label>
+        <div class="input-row">
+          <input
+            id="password-input"
+            name="password"
+            type="password"
+            autocomplete="new-password"
+            spellcheck="false"
+            placeholder="Type or generate a password"
+            aria-describedby="strength-label"
+          />
+          <button id="toggle-visibility" type="button" aria-label="Show password" aria-pressed="false">
+            <img id="visibility-icon" src="assets/icons/eye-open.svg" alt="" aria-hidden="true" />
+            <span id="visibility-text">Show</span>
+          </button>
+        </div>
+
+        <div class="meter-wrap" aria-live="polite">
+          <div class="meter-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Password strength meter">
+            <span id="strength-bar"></span>
+          </div>
+          <p>Strength: <strong id="strength-label">Weak</strong></p>
+        </div>
+      </section>
+
+      <section class="criteria" aria-labelledby="criteria-heading">
+        <h2 id="criteria-heading">Criteria Checklist</h2>
+        <ul id="criteria-list" class="criteria-list"></ul>
+      </section>
+
+      <section class="feedback" aria-labelledby="feedback-heading">
+        <h2 id="feedback-heading">Improvement Tips</h2>
+        <ul id="feedback-list" class="feedback-list"></ul>
+      </section>
+
+      <section class="generator" aria-labelledby="generator-heading">
+        <h2 id="generator-heading">Password Generator</h2>
+
+        <div class="generator-controls">
+          <label for="generator-length">Length: <span id="generator-length-value">16</span></label>
+          <input id="generator-length" type="range" min="8" max="48" value="16" />
+
+          <div class="options-row">
+            <label><input id="option-uppercase" type="checkbox" checked /> Uppercase</label>
+            <label><input id="option-numbers" type="checkbox" checked /> Numbers</label>
+            <label><input id="option-symbols" type="checkbox" checked /> Symbols</label>
+          </div>
+
+          <div class="button-row">
+            <button id="generate-password" type="button">
+              <img src="assets/icons/refresh.svg" alt="" aria-hidden="true" />
+              Generate
+            </button>
+            <button id="copy-password" type="button">
+              <img src="assets/icons/copy.svg" alt="" aria-hidden="true" />
+              Copy
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="breach" aria-labelledby="breach-heading">
+        <h2 id="breach-heading">Breach Check (Optional)</h2>
+        <p class="breach-note">Uses Have I Been Pwned k-anonymity model. Your full password is never sent.</p>
+        <button id="check-breach" type="button">Check Breach Exposure</button>
+        <p id="breach-status" class="breach-status" aria-live="polite">Run a breach check when you are ready.</p>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/checker.js" defer></script>
+  <script src="js/generator.js" defer></script>
+  <script src="js/breach.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

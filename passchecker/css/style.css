@@ -1,0 +1,324 @@
+﻿/**
+ * @file style.css
+ * @description Styling for the Password Strength Checker interface.
+ *              Includes responsive layout, strength visuals, and utility styles.
+ *
+ * @author      Benadic Manger
+ * @version     1.0.0
+ * @date        2026-05-15
+ */
+
+/* ============================================================
+   SECTION: Font Imports
+   Purposeful typography for personality and readability.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+/* ============================================================
+   SECTION: Theme Variables
+   Centralized colors, spacing, radius, and shadow tokens.
+   ============================================================ */
+
+:root {
+  --bg-top: #f8f2e4;
+  --bg-bottom: #dce9f2;
+  --card-bg: #fffdf8;
+  --text-main: #1d2a30;
+  --text-muted: #58656d;
+  --border: #d4dde2;
+  --accent: #1f7a8c;
+  --accent-hover: #166272;
+  --danger: #b32d00;
+  --success: #1f7a3b;
+  --meter-bg: #e8eef1;
+  --shadow: 0 18px 45px rgba(24, 41, 48, 0.14);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 9px;
+}
+
+/* ============================================================
+   SECTION: Base and Layout Styles
+   Sets page background and card-centered layout.
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(1000px 450px at 8% -10%, rgba(31, 122, 140, 0.18), transparent 60%),
+    radial-gradient(800px 500px at 100% 0%, rgba(196, 137, 51, 0.18), transparent 60%),
+    linear-gradient(165deg, var(--bg-top), var(--bg-bottom));
+}
+
+.app-shell {
+  width: min(980px, 92vw);
+  margin: 32px auto;
+  padding: 8px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  display: grid;
+  gap: 24px;
+}
+
+.card-header h1,
+section h2 {
+  font-family: 'Space Grotesk', 'Manrope', sans-serif;
+  letter-spacing: 0.2px;
+  margin: 0;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   SECTION: Checker Styles
+   Password input row, toggle button, and strength meter.
+   ============================================================ */
+
+.checker label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+#password-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  padding: 14px 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#password-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(31, 122, 140, 0.18);
+}
+
+#toggle-visibility {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  color: var(--text-main);
+  min-width: 96px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#toggle-visibility img {
+  width: 18px;
+  height: 18px;
+}
+
+#toggle-visibility:hover {
+  border-color: var(--accent);
+}
+
+.meter-wrap {
+  margin-top: 14px;
+}
+
+.meter-track {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--meter-bg);
+  overflow: hidden;
+  border: 1px solid rgba(23, 42, 48, 0.08);
+}
+
+#strength-bar {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: #e74c3c;
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.meter-wrap p {
+  margin: 10px 0 0;
+}
+
+/* ============================================================
+   SECTION: Criteria + Feedback Styles
+   Card-style rows for pass/fail and recommendations.
+   ============================================================ */
+
+.criteria-list,
+.feedback-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.criteria-list li,
+.feedback-list li {
+  background: #f7fafc;
+  border: 1px solid #dde7ec;
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+
+.criteria-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pass {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.fail {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+/* ============================================================
+   SECTION: Generator Styles
+   Slider, options, and action buttons.
+   ============================================================ */
+
+.generator-controls {
+  margin-top: 12px;
+  display: grid;
+  gap: 12px;
+}
+
+#generator-length {
+  width: 100%;
+}
+
+.options-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.options-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button-row button,
+#check-breach {
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+  padding: 11px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.08s ease;
+}
+
+.button-row button img {
+  width: 16px;
+  height: 16px;
+}
+
+.button-row button:hover,
+#check-breach:hover {
+  background: var(--accent-hover);
+}
+
+.button-row button:active,
+#check-breach:active {
+  transform: translateY(1px);
+}
+
+/* ============================================================
+   SECTION: Breach Styles
+   Informational text and status formatting.
+   ============================================================ */
+
+.breach-note {
+  margin: 8px 0 12px;
+  color: var(--text-muted);
+}
+
+.breach-status {
+  margin: 12px 0 0;
+  font-weight: 600;
+}
+
+/* ============================================================
+   SECTION: Responsive Rules
+   Mobile-friendly spacing and control alignment.
+   ============================================================ */
+
+@media (max-width: 700px) {
+  .app-shell {
+    width: min(560px, 94vw);
+    margin: 18px auto;
+  }
+
+  .card {
+    padding: 18px;
+    gap: 18px;
+  }
+
+  .input-row {
+    grid-template-columns: 1fr;
+  }
+
+  #toggle-visibility {
+    min-height: 44px;
+  }
+
+  .button-row button,
+  #check-breach {
+    width: 100%;
+    justify-content: center;
+  }
+}
